@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to Predict</title>
+    <link rel="stylesheet" href="{% static 'css/W3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+</head>
+<body>
+<h1>Diploy ML on Django</h1>
+
+<h2>We determine if borrowers can repay</h2>
+
+<h3>Enter the following details correctly:</h3>
+{{a}}
+
+<br>
+<form action="predict" method="post">
+    {% csrf_token %}
+    <div class="col-md-4 col-sm-4"> <label for="rate">Interest Rate:</label></div>
+    <input name="interest" type="text" id="rate" placeholder="15.21"><br><br>
+    <div class="col-md-4 col-sm-4"> <label for="score">Credit Score:</label></div>
+    <input name="credit" type="text" id="score" placeholder="670"><br><br>
+    <div class="col-md-4 col-sm-4"> <label for="loan">Loan Duration:</label></div>
+    <input name="duration" type="text" id="loan" placeholder="36"><br><br>
+    <div class="col-md-4 col-sm-4"> <label for="income">Monthly Income:</label></div>
+    <input name="income" type="text" id="income" placeholder="30000"><br><br>
+    <div class="col-md-4 col-sm-4"> <label for="amount">Loan Amount:</label></div>
+    <input name="amount" type="text" id="amount" placeholder="100000"><br><br>
+    <button class="btn btn-primary" type="submit">Check Eligibility</button>
+</form>
+
+
+<!--I tried it like this before-->
+
+{% if prediction %}
+    
+        <h2> Congratulations!!! You're Eligible for Loan Offer: {{prediction}}</h2>
+    
+        
+{% else %}
+<h2> Sorry!!! You're  Not Eligible for Loan Offer This Time, Try Again Later: {{prediction}}</h2>
+
+    
+{% endif %}
+
+
+
+     <!-- <jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script> 
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>  
+</body>
+
+</html>
